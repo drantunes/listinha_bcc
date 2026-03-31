@@ -1,4 +1,4 @@
-import 'package:listinha/models/product.dart';
+import 'package:listinha/app/models/product.dart';
 
 class CartItem {
   final Product product;
