@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:listinha/app/repositories/products_repository.dart';
+import 'package:listinha/app/features/products/products_viewmodel.dart';
 
 class AddProductScreen extends StatefulWidget {
-  final ProductsRepository productsRepository;
-  final void Function() updateScreen;
+  final ProductsViewmodel productsViewmodel;
 
   const AddProductScreen({
     super.key,
-    required this.productsRepository,
-    required this.updateScreen,
+    required this.productsViewmodel,
   });
 
   @override
@@ -34,8 +32,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   void save() {
     if (formKey.currentState!.validate()) {
-      widget.productsRepository.addProduct(productName.text);
-      widget.updateScreen();
+      widget.productsViewmodel.saveProduct(productName.text);
       Navigator.of(context).pop();
     }
   }

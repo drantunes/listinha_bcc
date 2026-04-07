@@ -10,13 +10,15 @@ class ProductsRepository {
   UnmodifiableListView<CartItem> get cartItems => UnmodifiableListView(_cartItems);
   UnmodifiableListView<Product> get products => UnmodifiableListView(_productsList);
 
-  void addProduct(String productName) {
+  Future<void> addProduct(String productName) async {
+    await Future.delayed(Duration(seconds: 2));
     _productsList.add(
       Product(title: productName),
     );
   }
 
-  List<Product> loadProducts() {
+  Future<List<Product>> loadProducts() async {
+    await Future.delayed(Duration(seconds: 2));
     return products;
   }
 
