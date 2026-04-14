@@ -93,7 +93,7 @@ class _CartItemsScreenState extends State<CartItemsScreen> {
                     ),
                     title: Text(cartItems[index].product.title),
                     trailing: SizedBox(
-                      width: 140,
+                      width: 150,
                       child: Transform.scale(
                         scale: .7,
                         child: Row(

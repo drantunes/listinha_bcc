@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:listinha/app/features/products/products_viewmodel.dart';
-import 'package:listinha/app/repositories/products_repository.dart';
+import 'package:listinha/app/providers.dart';
 import 'package:listinha/app/routes.dart';
+import 'package:listinha/app/theme.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -10,30 +10,24 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        Provider<ProductsRepository>(
-          create: (context) => ProductsRepository(),
-        ),
-        ChangeNotifierProvider<ProductsViewmodel>(
-          create: (context) => ProductsViewmodel(
-            productsRepository: context.read(),
-          ),
-        ),
-      ],
+      providers: providers,
       child: Builder(
         builder: (context) {
-          return MaterialApp.router(
-            title: 'Listinha',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.teal,
-              ),
-            ),
-            routerConfig: routes,
-            // home: ProductsScreen(
-            //   productsViewmodel: context.read(),
-            // ),
+          return ValueListenableBuilder(
+            valueListenable: themeNotifier,
+            builder: (context, theme, _) {
+              return MaterialApp.router(
+                title: 'Listinha',
+                debugShowCheckedModeBanner: false,
+                theme: (theme == ThemeMode.light)
+                    ? ListinhaTheme.lightTheme
+                    : ListinhaTheme.darkTheme,
+                routerConfig: routes,
+                // home: ProductsScreen(
+                //   productsViewmodel: context.read(),
+                // ),
+              );
+            },
           );
         },
       ),
